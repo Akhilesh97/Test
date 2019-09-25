@@ -1,0 +1,22 @@
+    <html>  
+    <head>  
+    <title>success</title>  
+    </head>  
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <body>  
+    <audio controls autoplay>
+
+    <source src = "{{ url_for ('static',filename='mp3/Ses02F_impro01.wav') }}" >
+    </audio>
+    <p>File uploaded successfully</p>  
+    <% import time %>
+    <% for i in range(5): %>
+        <% print(i) %>
+        <% time.sleep(1)
+    <% end %>
+    
+    
+    <p>File Name: {{name}}</p>    
+     
+    </body>  
+    </html>  

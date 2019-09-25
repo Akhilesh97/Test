@@ -1,0 +1,115 @@
+<html>  
+<head>  
+<title>success</title> 
+<style>
+       .button {
+      background-color: #008CBA; 
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: table;
+      font-size: 16px;
+      margin:auto;
+      display:block;
+    }
+    p{
+        text-align:center;
+    }
+    h4{
+        text-align:center;
+    }
+    </style>
+</head>  
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<body>  
+    <p id = "output">File "{{name}}" uploaded successfully</p> 
+    <audio id = "myAudio">
+    <source src = "{{ url_for ('static',filename='mp3/')}}{{name}}" >
+    </audio>
+    <br>
+    <p id = "out1"></p>
+    <br>
+    <p id = "out"></p>
+    <br>
+    <p id = "out2"></p>
+    <br>
+    <p>Click the buttons to play or pause the audio.</p>
+    <br>
+    <p id = "stop"></p>
+    <br>
+    <button onclick="playAudio()" class = "button" type="button">Play Audio</button>
+    <br>
+    <p>
+    <form action="/foo" method="post">
+    <button type="submit" class = "button" value="submit" >Finish and Generate Graph</button>
+    </form>
+    </p>
+    <script type="text/javascript">  
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        async function demo(){
+            var para = document.getElementById('out1');
+            var para1 = document.getElementById('out');
+            var para2 = document.getElementById('out2');
+            var speaker = "{{speaker}}";
+            var emo = "{{emo}}";
+            var text = "{{text}}";
+            
+            var speaker_ = speaker.replace(/[(&#39;)]/g, "").split(",");
+            var emo_ = emo.replace(/[(&#39;)]/g, "").split(",");
+            var text_ = text.replace(/[(&#39;)(4),]/g, "");
+            var text_1 = text_.replace(/[(\n,)]/g,"*").split("*");
+            x.play();
+            var flag = "true";
+            while(flag == "true"){
+                await sleep(6000);
+                flag = "False"
+                break;
+            }
+            for (const key of Object.keys(speaker_)) {
+                console.log(key, speaker_[key]);
+                var s1 = "Speaker : ";
+                para.innerText = s1.concat(speaker_[key]);
+                var s2 = "Emotion : ";
+                para1.innerText = s2.concat(emo_[key]);
+                var s3 = "Text : ";
+                para2.innerText = s3.concat(text_1[key]);
+                len = s3.concat(text_1[key]).split(" ").length;
+                console.log(typeof len);
+                if((len >2) && (len < 5)){
+                    await sleep(2000);
+                    console.log("2000");
+                }
+                else if ((len > 6) && (len < 35)){
+                    await sleep(6000);
+                    console.log("6000");
+                }
+                else if((len > 35) && (len < 50)){
+                    await sleep(8000);
+                    console.log("8000");
+                }
+                else if((len > 50)){
+                    await sleep(10000);
+                    console.log("10000");
+                }
+                
+            }  
+        }
+        var x = document.getElementById("myAudio");
+        function playAudio() {
+            demo();        
+        }    
+        function pauseAudio() { 
+            var stop = document.getElementById("stop");
+            x.pause();
+            document.getElementById("myAudio").onclick = function () {
+                location.href = "stop.html";
+            };
+            stop.innerText = "Stopped"; 
+        } 
+    </script>    
+</body>  
+</html>  
